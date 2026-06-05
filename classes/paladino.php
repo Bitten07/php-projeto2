@@ -6,6 +6,7 @@ class Paladino extends Personagem
     public function __construct()
     {
         parent::__construct(
+            nome: "Paladino",
             vida: 200,
             forca: 25,
             defesa: 30,
@@ -13,17 +14,20 @@ class Paladino extends Personagem
         );
     }
 
-    public function atacar()
+    public function atacar(Personagem $alvo)
     {
         $dano = max(self::DANO_MINIMO, $this->forca - rand(0, 10));
+        $alvo->receberDano($dano);
         return "Paladino atacou causando $dano de dano!";
     }
     public function defender()
     {
         $defesa = $this->defesa + rand(0, 5);
+        $this->defesaBonus = rand(0, 5);
+        
         return "Paladino defendeu aumentando sua defesa para $defesa!";
     }
-    public function usarHabilidade()
+    public function usarHabilidade(Personagem $alvo)
     {
         if ($this->energia >= 40) {
             $this->energia -= 40;
@@ -45,7 +49,7 @@ class Paladino extends Personagem
                 return "Paladino usou Bênção Sagrada e curou $cura de vida!";
             }
         } else {
-            #throw new energyException("Energia insuficiente para usar a habilidade!");
+            throw new energyException("Energia insuficiente para usar a habilidade!");
         }
     }
 }
