@@ -35,7 +35,7 @@ class Jogo {
 
         do {
             $this->exibirMenu($jogadorAtivo);
-            $acao = trim(readline("O que {jogadorAtivo->getNome()} deseja fazer? "));
+            $acao = trim(readline("O que {$jogadorAtivo->getNome()} deseja fazer? "));
             
             if (!in_array($acao, ['1', '2', '3'])) {
                 echo "Ação inválida! Tente novamente.\n";
@@ -75,15 +75,19 @@ class Jogo {
         return false;
     } 
 
-    private function aplicarVeneno(Personagem $alvo): void {
-        $danoStack = $alvo->getVidaMaxima() * 0.02;
-        $danoTotal = $alvo->getStacksVeneno() * $danoStack;
-        $alvo->receberDano($danoTotal);
+    private function aplicarVeneno(): void {
+        foreach ([$this->jogador1, $this->jogador2] as $jogador) {
+            if ($jogador->getStackVeneno() > 0) {
+                $dano = (int)($jogador->getVidaMax() * 0.02 * $jogador->getStackVeneno());
+                $jogador->receberDano($dano);
+                echo "{$jogador->getNome()} sofreu $dano de dano por veneno!\n";
+            }
+        }
     }
     private function exibirStatus(): void {
         echo "\n--- Status dos Jogadores ---\n";
-        echo "{$this->jogador1->getNome()}: Vida: {$this->jogador1->getVida()}/{$this->jogador1->getVidaMaxima()} | Energia: {$this->jogador1->getEnergia()}/{$this->jogador1->getEnergiaMaxima()} | Stacks de Veneno: {$this->jogador1->getStacksVeneno()}\n";
-        echo "{$this->jogador2->getNome()}: Vida: {$this->jogador2->getVida()}/{$this->jogador2->getVidaMaxima()} | Energia: {$this->jogador2->getEnergia()}/{$this->jogador2->getEnergiaMaxima()} | Stacks de Veneno: {$this->jogador2->getStacksVeneno()}\n";
+        echo "{$this->jogador1->getNome()}: Vida: {$this->jogador1->getVida()}/{$this->jogador1->getVidaMax()} | Energia: {$this->jogador1->getEnergia()}/{$this->jogador1->getEnergiaMax()}\n";
+        echo "{$this->jogador2->getNome()}: Vida: {$this->jogador2->getVida()}/{$this->jogador2->getVidaMax()} | Energia: {$this->jogador2->getEnergia()}/{$this->jogador2->getEnergiaMax()}\n";
     }
 
 };
