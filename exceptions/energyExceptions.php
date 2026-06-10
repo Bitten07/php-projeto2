@@ -1,3 +1,3 @@
 <?php
 
-class energyException extends Exception {}
+class EnergyException extends Exception {}

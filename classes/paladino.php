@@ -17,14 +17,14 @@ class Paladino extends Personagem
     public function atacar(Personagem $alvo)
     {
         $dano = max(self::DANO_MINIMO, $this->forca - rand(0, 10));
-        $alvo->receberDano($dano);
-        return "Paladino atacou causando $dano de dano!";
+        $danoCausado = $alvo->receberDano($dano);
+        return "Paladino atacou causando $danoCausado de dano!";
     }
     public function defender()
     {
-        $defesa = $this->defesa + rand(0, 5);
         $this->defesaBonus = rand(0, 5);
-        
+        $defesa = $this->defesa + $this->defesaBonus;
+
         return "Paladino defendeu aumentando sua defesa para $defesa!";
     }
     public function usarHabilidade(Personagem $alvo)
@@ -49,7 +49,7 @@ class Paladino extends Personagem
                 return "Paladino usou Bênção Sagrada e curou $cura de vida!";
             }
         } else {
-            throw new energyException("Energia insuficiente para usar a habilidade!");
+            throw new EnergyException("Energia insuficiente para usar a habilidade!");
         }
     }
 }

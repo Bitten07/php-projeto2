@@ -17,13 +17,13 @@ class Mago extends Personagem
     public function atacar(Personagem $alvo)
     {
         $dano = max(self::DANO_MINIMO, $this->forca - rand(0, 10));
-        $alvo->receberDano($dano);
-        return "Mago atacou causando $dano de dano!";
+        $danoCausado = $alvo->receberDano($dano);
+        return "Mago atacou causando $danoCausado de dano!";
     }
     public function defender()
     {
-        $defesa = $this->defesa + rand(0, 5);
         $this->defesaBonus = rand(0, 5);
+        $defesa = $this->defesa + $this->defesaBonus;
         return "Mago defendeu aumentando sua defesa para $defesa!";
     }
     public function usarHabilidade(Personagem $alvo)
@@ -32,10 +32,10 @@ class Mago extends Personagem
             $this->energia -= 60;
 
             $dano = max(self::DANO_MINIMO, ($this->forca * 2) - rand(0, 20));
-            $alvo->receberDano($dano);
-            return "Mago usou Explosão Arcana causando $dano de dano!";
+            $danoCausado = $alvo->receberDano($dano);
+            return "Mago usou Explosão Arcana causando $danoCausado de dano!";
         } else {
-            throw new energyException("Energia insuficiente para usar a habilidade!");
+            throw new EnergyException("Energia insuficiente para usar a habilidade!");
         }
     }
 }

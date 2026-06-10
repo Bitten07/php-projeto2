@@ -11,6 +11,7 @@ abstract class Personagem
     protected int $energia;
     protected int $energiaMax;
     public const DANO_MINIMO = 0;
+    public const REGENERACAO_ENERGIA = 10;
 
     protected int $stackVeneno;
 
@@ -62,13 +63,25 @@ abstract class Personagem
         return $this->stackVeneno;
     }
 
-    public function receberDano(int $dano): void {
-        $danoFinal = max(self::DANO_MINIMO, $dano - $this->defesa - $this->defesaBonus);
+    public function receberDano(int $dano, bool $ignorarDefesa = false): int {
+        $vidaAntes = $this->vida;
+        $reducaoDefesa = $ignorarDefesa ? 0 : intdiv($this->defesa + $this->defesaBonus, 2);
+        $danoFinal = max(self::DANO_MINIMO, $dano - $reducaoDefesa);
+        $this->vida = max(0, $this->vida - $danoFinal);
+
+        return $vidaAntes - $this->vida;
+    }
+    public function limparDefesaBonus(): void {
         $this->defesaBonus = 0;
-        $this->vida -= $danoFinal;
     }
     public function adicionarVeneno(): void {
         $this->stackVeneno++;
+    }
+    public function regenerarEnergia(): int {
+        $energiaAntes = $this->energia;
+        $this->energia = min($this->energia + self::REGENERACAO_ENERGIA, $this->energiaMax);
+
+        return $this->energia - $energiaAntes;
     }
 
     abstract public function atacar(Personagem $alvo);
