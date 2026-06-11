@@ -4,13 +4,14 @@ require 'classes/personagem.php';
 require 'classes/paladino.php';
 require 'classes/ladino.php';
 require 'classes/mago.php';
+require 'classes/visual.php';
 require 'classes/jogo.php';
 require 'exceptions/energyExceptions.php';
-require 'classes/visual.php';
 
 echo "Jogador 1: escolha seu personagem";
 echo "\n[1. Ladino] [2. Mago] [3. Paladino]\n";
 $escolha = trim(readline("Digite o numero do seu personagem: "));
+Visual::separador();
 
 switch ($escolha) {
     case '1':
@@ -26,10 +27,11 @@ switch ($escolha) {
         echo "Escolha inválida!";
         return;
 }
+
 echo "Jogador 2: escolha seu personagem";
 echo "\n[1. Ladino] [2. Mago] [3. Paladino]\n";
 $escolha = trim(readline("Digite o numero do seu personagem: "));
-
+Visual::separador();
 switch ($escolha) {
     case '1':
         $jogador2 = new Ladino;

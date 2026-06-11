@@ -4,11 +4,6 @@ Projeto desenvolvido em PHP para simular uma arena de combate por turnos entre d
 
 ## Como executar
 
-Requisitos:
-
-- PHP 8.1 ou superior
-- Terminal ou prompt de comando
-
 Para iniciar o jogo, execute:
 
 ```bash
@@ -122,13 +117,3 @@ O Ladino pode aplicar veneno no alvo. O veneno acumula cargas e causa dano no in
 └── exceptions
     └── energyExceptions.php
 ```
-
-## Arquivo principal
-
-O ponto de entrada do jogo e o arquivo:
-
-```bash
-index.php
-```
-
-Ele carrega as classes, permite que os jogadores escolham seus personagens e inicia a partida.

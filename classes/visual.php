@@ -10,8 +10,37 @@ class Visual
         self::exibirStatusPersonagem($jogador2);
     }
 
+    public static function separador(): void
+    {
+        echo str_repeat("-", 50) . "\n";
+    }
+
+    private static function exibirPersonagem(Personagem $personagem): void
+    {
+        switch ($personagem->getNome()) {
+            case 'Mago':
+                echo  "
+     #^#
+    ##..##            
+    MM++--##          
+    ##++----######mm
+    ##++++....::::@@
+   #..++--++mm####  
+  ##++++########    
+++######  ####@@  
+    --------##----mm
+    ------##------++
+    ------##  --@@mm
+    ##----####--++mm
+    ##------------mm
+##--##----------mm\n";
+                break;
+        }
+    }
+
     private static function exibirStatusPersonagem(Personagem $personagem): void
     {
+        self::exibirPersonagem($personagem);
         echo "=== Status de {$personagem->getNome()} ===\n";
         echo "Vida: {$personagem->getVida()}/{$personagem->getVidaMax()}\n";
         echo "Energia: {$personagem->getEnergia()}/{$personagem->getEnergiaMax()}\n";
@@ -23,5 +52,11 @@ class Visual
         }
 
         echo "=========================\n";
+    }
+
+    public static function exibirMenu(Personagem $jogador): void
+    {
+        echo "\n--- Vez do {$jogador->getNome()} ---\n";
+        echo "[1. Atacar] [2. Defender] [3. Usar Habilidade]\n";
     }
 }

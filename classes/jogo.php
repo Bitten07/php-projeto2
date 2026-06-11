@@ -1,5 +1,4 @@
 <?php
-
 class Jogo
 {
     private Personagem $jogador1;
@@ -14,12 +13,13 @@ class Jogo
     public function iniciar(): void
     {
         while ($this->jogador1->getVida() > 0 && $this->jogador2->getVida() > 0) {
-            $this->exibirStatus();
             $this->aplicarVeneno();
+            $this->exibirStatus();
             if ($this->verificarVitoria()) {
                 break;
             };
             $this->executarTurno();
+            Visual::separador();
             if ($this->verificarVitoria()) {
                 break;
             };
@@ -27,11 +27,6 @@ class Jogo
         }
     }
 
-    private function exibirMenu(Personagem $jogador): void
-    {
-        echo "\n--- Vez do {$jogador->getNome()} ---\n";
-        echo "[1. Atacar] [2. Defender] [3. Usar Habilidade]\n";
-    }
 
     private function executarTurno(): void
     {
@@ -47,7 +42,7 @@ class Jogo
         $acaoExecutada = false;
 
         do {
-            $this->exibirMenu($jogadorAtivo);
+            Visual::exibirMenu($jogadorAtivo);
             $acao = trim(readline("O que {$jogadorAtivo->getNome()} deseja fazer? "));
 
             if (!in_array($acao, ['1', '2', '3'])) {
@@ -102,7 +97,7 @@ class Jogo
     {
         foreach ([$this->jogador1, $this->jogador2] as $jogador) {
             if ($jogador->getStackVeneno() > 0) {
-                $dano = (int)($jogador->getVidaMax() * 0.02 * $jogador->getStackVeneno());
+                $dano = (int)($jogador->getVidaMax() * 0.1 * $jogador->getStackVeneno());
                 $danoCausado = $jogador->receberDano($dano, true);
                 echo "{$jogador->getNome()} sofreu {$danoCausado} de dano por veneno!\n";
             }
