@@ -35,13 +35,69 @@ class Visual
     ##------------mm
 ##--##----------mm\n";
                 break;
+            case 'Ladino':
+                echo "                                  
+        ############                                    
+        ################                                
+    ##    ################                                
+##@@##    ##############                                
+    ####::##############                                
+        MMmm##############                                
+        MM##mm##############                              
+        ########--############                            
+        ######################                            
+        ##########----########                            
+        ##########  --########                            
+        ##############mm######                            
+        ######################                            
+        ######################                            
+        ######################                            
+        ######################                            
+        ######################                            
+        ######################                            
+        ######################                            
+        ######################                            
+        ######################                            
+        ######@@############                              
+        ####@@  ##      ##                                
+        ######          ##@@\n";
+                break;
+            case 'Paladino':
+                echo "                            
+                ::MMMMMM##::::::              
+                    ##@@mmmmmm####              
+                ####mm########  ##              
+            ++mmmmmmMM        ##              
+                ----####  ----##      ++        
+            ########mm####    ##  ##          
+            ##mmmm####@@mmmm##  ##  ##          
+        ##mmmmmm##########mm######  ++@@      
+        ##mmmmmmmm##@@..############  mm##      
+    ::##mmmmMM####  ..##mmmmmm####  mmmm##    
+    ::####mm####    MM  ####mm##  ##mmmm##    
+    ::####mm##    ######      ##  ##mmmm##    
+    ----    ..--######MM########  ##mm::mm..  
+        ############    ########  ##mm      ##
+        ####mmmmmm##  ##################@@  ##  
+        ######MM############mmmm  mm####@@##    
+        ##    ++######@@####++++  ++####mm##    
+    ##--  ##  ++##    ########++  ++####mm##    
+##  ++######++      ####    ##  mm######      
+##    mmmm##          ##          mmmm  ##      
+##  ++######      ######    ##  mm##@@MM      
+                    ####  ####@@  @@##          
+                ####mm####mmmm  mm####        
+                ####::####mmmm  mm####        
+                ####::################\n";
+                break;
+            default;
         }
     }
 
     private static function exibirStatusPersonagem(Personagem $personagem): void
     {
         self::exibirPersonagem($personagem);
-        echo "=== Status de {$personagem->getNome()} ===\n";
+        echo "======= Status de {$personagem->getNome()} =======\n";
         echo "Vida: {$personagem->getVida()}/{$personagem->getVidaMax()}\n";
         echo "Energia: {$personagem->getEnergia()}/{$personagem->getEnergiaMax()}\n";
         echo "Força: {$personagem->getForca()}\n";
@@ -51,7 +107,7 @@ class Visual
             echo "Stack de Veneno: {$personagem->getStackVeneno()}\n";
         }
 
-        echo "=========================\n";
+        echo "=================================\n";
     }
 
     public static function exibirMenu(Personagem $jogador): void
