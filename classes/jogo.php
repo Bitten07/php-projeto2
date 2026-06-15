@@ -36,7 +36,7 @@ class Jogo
         $energiaRecuperada = $jogadorAtivo->regenerarEnergia();
 
         if ($energiaRecuperada > 0) {
-            echo "{$jogadorAtivo->getNome()} recuperou {$energiaRecuperada} de energia.\n";
+            echo "{$jogadorAtivo->getNome()} recuperou \033[32m{$energiaRecuperada}\033[0m de energia.\n";
         }
 
         $acaoExecutada = false;
@@ -74,23 +74,14 @@ class Jogo
     private function verificarVitoria(): bool
     {
         if ($this->jogador1->getVida() <= 0) {
-            $this->exibirResumoFinal($this->jogador2, $this->jogador1);
+            Visual::exibirResumoFinal($this->jogador2, $this->jogador1, $this->turno);
             return true;
         }
         if ($this->jogador2->getVida() <= 0) {
-            $this->exibirResumoFinal($this->jogador1, $this->jogador2);
+            Visual::exibirResumoFinal($this->jogador1, $this->jogador2, $this->turno);
             return true;
         }
         return false;
-    }
-
-    private function exibirResumoFinal(Personagem $vencedor, Personagem $derrotado): void
-    {
-        echo "\n--- Fim da Partida ---\n";
-        echo "Vencedor: {$vencedor->getNome()}\n";
-        echo "Turnos jogados: {$this->turno}\n";
-        echo "{$vencedor->getNome()}: {$vencedor->getVida()}/{$vencedor->getVidaMax()} HP restante\n";
-        echo "{$derrotado->getNome()}: {$derrotado->getVida()}/{$derrotado->getVidaMax()} HP restante\n";
     }
 
     private function aplicarVeneno(): void
@@ -99,7 +90,7 @@ class Jogo
             if ($jogador->getStackVeneno() > 0) {
                 $dano = (int)($jogador->getVidaMax() * 0.1 * $jogador->getStackVeneno());
                 $danoCausado = $jogador->receberDano($dano, true);
-                echo "{$jogador->getNome()} sofreu {$danoCausado} de dano por veneno!\n";
+                echo "{$jogador->getNome()} sofreu \033[34m{$danoCausado}\033[0m de dano por veneno!\n";
             }
         }
     }

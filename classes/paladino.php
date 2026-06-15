@@ -18,14 +18,14 @@ class Paladino extends Personagem
     {
         $dano = max(self::DANO_MINIMO, $this->forca - rand(0, 10));
         $danoCausado = $alvo->receberDano($dano);
-        return "Paladino atacou causando $danoCausado de dano!";
+        return "Paladino atacou causando \033[31m$danoCausado\033[0m de dano!";
     }
     public function defender()
     {
         $this->defesaBonus = rand(0, 5);
         $defesa = $this->defesa + $this->defesaBonus;
 
-        return "Paladino defendeu aumentando sua defesa para $defesa!";
+        return "Paladino defendeu aumentando sua defesa para \033[33m$defesa\033[0m!";
     }
     public function usarHabilidade(Personagem $alvo)
     {
@@ -34,19 +34,19 @@ class Paladino extends Personagem
             if ($this->vida >= (($this->vidaMax * 80) / 100)) {
                 $cura = (($this->vidaMax * 10) / 100);
                 $this->vida = min($this->vida + $cura, $this->vidaMax);
-                return "Paladino usou Bênção Sagrada e curou $cura de vida!";
+                return "Paladino usou Bênção Sagrada e curou \033[34m$cura\033[0m de vida!";
             } else if ($this->vida >= (($this->vidaMax * 50) / 100) && $this->vida < (($this->vidaMax * 80) / 100)) {
                 $cura = (($this->vidaMax * 20) / 100);
                 $this->vida = min($this->vida + $cura, $this->vidaMax);
-                return "Paladino usou Bênção Sagrada e curou $cura de vida!";
+                return "Paladino usou Bênção Sagrada e curou \033[34m$cura\033[0m de vida!";
             } else if ($this->vida >= (($this->vidaMax * 30) / 100) && $this->vida < (($this->vidaMax * 50) / 100)) {
                 $cura = (($this->vidaMax * 35) / 100);
                 $this->vida = min($this->vida + $cura, $this->vidaMax);
-                return "Paladino usou Bênção Sagrada e curou $cura de vida!";
+                return "Paladino usou Bênção Sagrada e curou \033[34m$cura\033[0m de vida!";
             } else if ($this->vida < (($this->vidaMax * 30) / 100)) {
                 $cura = (($this->vidaMax * 55) / 100);
                 $this->vida = min($this->vida + $cura, $this->vidaMax);
-                return "Paladino usou Bênção Sagrada e curou $cura de vida!";
+                return "Paladino usou Bênção Sagrada e curou \033[34m$cura\033[0m de vida!";
             }
         } else {
             throw new EnergyException("Energia insuficiente para usar a habilidade!");

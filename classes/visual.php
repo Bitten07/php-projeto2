@@ -19,21 +19,34 @@ class Visual
     {
         switch ($personagem->getNome()) {
             case 'Mago':
-                echo  "
-     #^#
-    ##..##            
-    MM++--##          
-    ##++----######mm
-    ##++++....::::@@
-   #..++--++mm####  
-  ##++++########    
-++######  ####@@  
-    --------##----mm
-    ------##------++
-    ------##  --@@mm
-    ##----####--++mm
-    ##------------mm
-##--##----------mm\n";
+                echo  "                                        
+      ####                              
+    ##....####                          
+    ##++......##                        
+    MM##++------####                    
+      ##mmmm--------####                
+      ####mm++++--------############mm  
+        ##++++++++++----++++++++++++mmmm
+        ##++++++++::......::::::::++@@@@
+        ##MM++::::..------++MMMMMM@@mm  
+        ..##++------++mmmmmm######++    
+        ##++++++++++++######            
+      ##++++++++##########  ##          
+    ##++++++########  ####  ####--      
+  ##++++##--########  ########--@@++    
+    ####--######################++MMmm  
+      ##--------------######------MMmm  
+        ##----######------------@@##mm  
+      ##------------####------##--..++@@
+      ##------------######----##--..++@@
+      ##------------##    ------@@##mm  
+      ##------------##    ----##++MMmm  
+        ##----------######----##++MMmm  
+        ##--------##--------##----MMmm  
+        ##--------##------##------MMmm  
+      ##--##----##----####--------MMmm  
+    ##------####------------------::mm@@
+      ######    ####################mm  \n";
                 break;
             case 'Ladino':
                 echo "                                  
@@ -91,6 +104,7 @@ class Visual
                 ####::################\n";
                 break;
             default;
+                break;
         }
     }
 
@@ -98,13 +112,12 @@ class Visual
     {
         self::exibirPersonagem($personagem);
         echo "======= Status de {$personagem->getNome()} =======\n";
-        echo "Vida: {$personagem->getVida()}/{$personagem->getVidaMax()}\n";
-        echo "Energia: {$personagem->getEnergia()}/{$personagem->getEnergiaMax()}\n";
-        echo "Força: {$personagem->getForca()}\n";
-        echo "Defesa: {$personagem->getDefesa()} (+{$personagem->getDefesaBonus()})\n";
+        echo "Vida: \033[34m {$personagem->getVida()} \033[0m / \033[34m {$personagem->getVidaMax()} \033[0m \n";
+        echo "Energia: \033[32m{$personagem->getEnergia()}\033[0m / \033[32m{$personagem->getEnergiaMax()}\033[0m\n";
+        echo "Defesa: \033[33m {$personagem->getDefesa()} \033[0m (\033[33m+{$personagem->getDefesaBonus()}\033[0m)\n";
 
         if ($personagem->getStackVeneno() > 0) {
-            echo "Stack de Veneno: {$personagem->getStackVeneno()}\n";
+            echo "Stack de Veneno: \033[34m{$personagem->getStackVeneno()}\033[0m\n";
         }
 
         echo "=================================\n";
@@ -114,5 +127,14 @@ class Visual
     {
         echo "\n--- Vez do {$jogador->getNome()} ---\n";
         echo "[1. Atacar] [2. Defender] [3. Usar Habilidade]\n";
+    }
+
+    public static function exibirResumoFinal(Personagem $vencedor, Personagem $derrotado, int $turno): void
+    {
+        echo "\n--- Fim da Partida ---\n";
+        echo "Vencedor: {$vencedor->getNome()}\n";
+        echo "Turnos jogados: {$turno}\n";
+        echo "{$vencedor->getNome()}: \033[31m {$vencedor->getVida()}\033[0m /\033[34m {$vencedor->getVidaMax()}\033[0m  HP restante\n";
+        echo "{$derrotado->getNome()}: \033[31m {$derrotado->getVida()}\033[0m /\033[34m {$derrotado->getVidaMax()}\033[0m  HP restante\n";
     }
 }

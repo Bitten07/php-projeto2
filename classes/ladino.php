@@ -18,13 +18,13 @@ class Ladino extends Personagem
     {
         $dano = max(self::DANO_MINIMO, $this->forca - rand(0, 10));
         $danoCausado = $alvo->receberDano($dano);
-        return "Ladino atacou causando $danoCausado de dano!";
+        return "Ladino atacou causando \033[31m$danoCausado\033[0m de dano!";
     }
     public function defender()
     {
         $this->defesaBonus = rand(0, 5);
         $defesa = $this->defesa + $this->defesaBonus;
-        return "Ladino defendeu aumentando sua defesa para $defesa!";
+        return "Ladino defendeu aumentando sua defesa para \033[33m$defesa\033[0m!";
     }
     public function usarHabilidade(Personagem $alvo)
     {
@@ -33,7 +33,7 @@ class Ladino extends Personagem
 
             $alvo->adicionarVeneno();
 
-            return "Ladino usou Lâmina Envenenada, aplicando 1 stack de veneno no alvo!";
+            return "Ladino usou Lâmina Envenenada, aplicando \033[34m1 stack\033[0m de veneno no alvo!";
         } else {
             throw new EnergyException("Energia insuficiente para usar a habilidade!");
         }
