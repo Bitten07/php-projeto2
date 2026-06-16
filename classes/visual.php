@@ -46,34 +46,34 @@ class Visual
         ##--------##------##------MMmm  
       ##--##----##----####--------MMmm  
     ##------####------------------::mm@@
-      ######    ####################mm  \n";
+      ######    ####################mm\n";
                 break;
-            case 'Ladino':
-                echo "                                  
-        ############                                    
-        ################                                
-    ##    ################                                
-##@@##    ##############                                
-    ####::##############                                
-        MMmm##############                                
-        MM##mm##############                              
-        ########--############                            
-        ######################                            
-        ##########----########                            
-        ##########  --########                            
-        ##############mm######                            
-        ######################                            
-        ######################                            
-        ######################                            
-        ######################                            
-        ######################                            
-        ######################                            
-        ######################                            
-        ######################                            
-        ######################                            
-        ######@@############                              
-        ####@@  ##      ##                                
-        ######          ##@@\n";
+            case 'Assassino':
+                echo "
+                                            ##                        
+                        MM@@@@@@####    ##@@##                      
+                        ##MMMMMMMM##    ##@@MMMM##                    
+                    @@MMMMMMMMMM##  ##    MMMM@@--                  
+                    ##MMMMMMMMMMMM####..      MMMM--                  
+                MMMMMMMMMMMMMMMMMM##@@MM    MMMM##                  
+                @@MMMMMM####MMMMMM######--  mmMM##                  
+                @@MMMMMM@@++  ##@@MMMM##@@  ##  MMMM##                
+            ####MM######    ..##MMMM####        MM##                
+            ##MM######        ##@@MM####..  ##  mm@@..              
+            ##MM########    @@##########--    ##mmMM..              
+            ######@@----    ..--########      ##..MM..              
+            ############    @@######..          --MM..              
+        @@########################@@##@@        MMMM..              
+        ##############MMMMMM@@####MMMM##        MMMM..              
+    MM##############MMMMMMMMMMMM####MM##--        ##                
+    ################MMMMMMMMMMMM########--        ##                
+MM##++  ..######++##MMMMMMMMMM##########--                          
+####        ####--##MMMMMMMM@@##########                            
+..            ..  ..##@@MM@@######  ####                            
+                    ##############  @@                              
+                        ########                                      
+                        @@######                                    
+                            @@--\n";
                 break;
             case 'Paladino':
                 echo "                            
@@ -103,9 +103,19 @@ class Visual
                 ####::####mmmm  mm####        
                 ####::################\n";
                 break;
-            default;
+            default:
                 break;
         }
+    }
+
+    public static function barraVida(int $vidaAtual, int $vidaMax): string
+    {
+        $tamanhoBarra = $vidaMax / 10;
+        $porcentagem = $vidaAtual / $vidaMax;
+        $partesCheias = (int) round($porcentagem * $tamanhoBarra);
+        $partesVazias = $tamanhoBarra - $partesCheias;
+
+        return "[\033[34m" . str_repeat("#", $partesCheias) . str_repeat("-", $partesVazias) . "\033[0m]\n";
     }
 
     private static function exibirStatusPersonagem(Personagem $personagem): void
@@ -113,6 +123,7 @@ class Visual
         self::exibirPersonagem($personagem);
         echo "======= Status de {$personagem->getNome()} =======\n";
         echo "Vida: \033[34m {$personagem->getVida()} \033[0m / \033[34m {$personagem->getVidaMax()} \033[0m \n";
+        echo self::barraVida($personagem->getVida(), $personagem->getVidaMax());
         echo "Energia: \033[32m{$personagem->getEnergia()}\033[0m / \033[32m{$personagem->getEnergiaMax()}\033[0m\n";
         echo "Defesa: \033[33m {$personagem->getDefesa()} \033[0m (\033[33m+{$personagem->getDefesaBonus()}\033[0m)\n";
 

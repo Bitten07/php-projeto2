@@ -12,21 +12,9 @@ php index.php
 
 Depois disso, cada jogador escolhe um personagem digitando o numero correspondente no terminal.
 
-## Regras do jogo
-
-O jogo acontece em turnos alternados entre Jogador 1 e Jogador 2.
-
-Em cada turno, o jogador da vez escolhe uma das acoes:
-
-1. Atacar
-2. Defender
-3. Usar habilidade especial
-
-A partida termina quando a vida de um dos personagens chega a zero. Ao final, o jogo mostra o vencedor, a quantidade de turnos jogados e a vida restante dos personagens.
-
 ## Personagens
 
-### Ladino
+### Assassino
 
 Atributos iniciais:
 
@@ -91,29 +79,4 @@ Se o jogador tentar usar uma habilidade sem energia suficiente, o jogo mostra um
 
 ### Veneno
 
-O Ladino pode aplicar veneno no alvo. O veneno acumula cargas e causa dano no inicio dos turnos seguintes.
-
-## Conceitos de POO utilizados
-
-- Classe abstrata: `Personagem`
-- Heranca: `Ladino`, `Mago` e `Paladino` herdam de `Personagem`
-- Polimorfismo: cada personagem implementa `atacar`, `defender` e `usarHabilidade`
-- Encapsulamento: os atributos dos personagens sao protegidos e acessados por metodos
-- Excecao personalizada: `EnergyException`
-- Organizacao em arquivos: cada classe possui seu proprio arquivo
-
-## Estrutura do projeto
-
-```text
-.
-├── index.php
-├── README.md
-├── classes
-│   ├── jogo.php
-│   ├── personagem.php
-│   ├── ladino.php
-│   ├── mago.php
-│   └── paladino.php
-└── exceptions
-    └── energyExceptions.php
-```
+O Assassino pode aplicar veneno no alvo. O veneno acumula cargas e causa dano no inicio dos turnos seguintes.

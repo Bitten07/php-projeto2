@@ -13,6 +13,7 @@ class Jogo
     public function iniciar(): void
     {
         while ($this->jogador1->getVida() > 0 && $this->jogador2->getVida() > 0) {
+            Visual::separador();
             $this->aplicarVeneno();
             $this->exibirStatus();
             if ($this->verificarVitoria()) {
@@ -24,6 +25,7 @@ class Jogo
                 break;
             };
             $this->turno++;
+            system('clear');
         }
     }
 
